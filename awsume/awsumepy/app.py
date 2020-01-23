@@ -147,8 +147,23 @@ class Awsume(object):
                     raise exceptions.SAMLRoleNotFoundError(principal_arn, profile_role_arn)
                 safe_print('Match: {}'.format(choice))
             else:
+                #choice = self.plugin_manager.hook.get_saml_role_choice(config=self.config, arguments=args, roles=roles)
                 for index, choice in enumerate(roles):
-                    safe_print('{}) {}'.format(index, choice), color=colorama.Fore.LIGHTYELLOW_EX)
+                    logger.info(choice)
+                    # FIXME: Not sure why this is a list?!?!
+                    pretty_choice = self.plugin_manager.hook.get_saml_role_pretty_name(
+                        config=self.config,
+                        arguments=args,
+                        role=choice
+                    )[0]
+                    logger.info(pretty_choice)
+                    safe_print(
+                        '{}) {}'.format(
+                            index,
+                            pretty_choice
+                        ),
+                        color=colorama.Fore.LIGHTYELLOW_EX
+                    )
                 safe_print('Which role do you want to assume? > ', end='', color=colorama.Fore.LIGHTCYAN_EX)
                 response = input()
                 if response.isnumeric():

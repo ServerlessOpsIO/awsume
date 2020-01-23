@@ -452,6 +452,16 @@ def get_session_token_credentials(config: dict, arguments: argparse.Namespace, p
 
 
 @hookimpl(tryfirst=True)
+def get_saml_role_choice(config: dict, arguments: argparse.Namespace, roles: list) -> str:
+    pass
+
+@hookimpl(tryfirst=True)
+def get_saml_role_pretty_name(config: dict, arguments: argparse.Namespace, role: str) -> str:
+    logger.info(role)
+    return role
+
+
+@hookimpl(tryfirst=True)
 def get_credentials(config: dict, arguments: argparse.Namespace, profiles: dict) -> dict:
     logger.info('Getting credentials')
 

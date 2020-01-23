@@ -45,6 +45,14 @@ def get_credentials_with_saml(config: dict, arguments: argparse.Namespace):
     """"""
 
 @hookspec
+def get_saml_role_choice(config: dict, arguments: argparse.Namespace, roles: list):
+    """"""
+
+@hookspec
+def get_saml_role_pretty_name(config: dict, arguments: argparse.Namespace, role: str):
+    """"""
+
+@hookspec
 def get_credentials_with_web_identity(config: dict, arguments: argparse.Namespace):
     """"""
 
